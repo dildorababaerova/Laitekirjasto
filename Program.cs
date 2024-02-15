@@ -27,6 +27,20 @@ namespace Laitekirjasto
         int warranty = 12;
         public int Warranty { get { return warranty; } set { warranty = value; } }
 
+
+        string processorType = "N/A";
+        public string ProcessorType { get { return processorType; } set { processorType = value; } }
+
+
+        int amountRAM = 0;
+        public int AmountRAM { get { return amountRAM; } set { amountRAM = value; } }
+
+
+        int storageCapacity = 0;
+        public int StorageCapacity { get { return storageCapacity; } set { storageCapacity = value; } }
+
+
+
         // Konstruktori eli olionmuodostin (constructor) ilman argumentteja
         public Device()
         {
@@ -64,75 +78,105 @@ namespace Laitekirjasto
         public int StorageCapacity { get { return storageCapacity; } set { storageCapacity = value; } }
 
         //Konstructor
-        public Computer(string processorType, int amountRAM, int storageCapacity) 
+        public Computer(string processorType, int amountRAM, int storageCapacity)
         {
             this.processorType = processorType;
             this.amountRAM = amountRAM;
             this.storageCapacity = storageCapacity;
         }
-         public Computer() : base()
+        public Computer() : base()
         {
 
         }
 
         public Computer(string name) : base(name)
+        {
+        }
+
+
+        public void ShowInfo()
 
         {
-            processorType = "Intel 17";
-            amountRAM = 16;
-            storageCapacity = 344567899;
-         }
+            Console.WriteLine("Koneen nimi: " + Name);
+            Console.WriteLine("Processori: " + ProcessorType);
+            Console.WriteLine("Keskimuisti " +  AmountRAM);
+            Console.WriteLine("Levytila: " + StorageCapacity);
 
-    }
-
-    class Smartphone : Device
-    {
-
-    }
-
-    class Tablet : Device
-    {
-
-    }
-
-    // Pääohjelman luokka, josta tulee Program.exe
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            // Ohjelman varsinaiset toiminnot tapahtuvat täällä
-            // Ohjelma kysyy käyttäjältä tietoja laitteista ja
-            // vastaamalla kysymyksiin tiedot tallennetaan muuttujiin.
-
-            // Luodaan uusi laite Device-luokasta
-
-            Device laite = new Device("Opekone");
-            Console.WriteLine("Laitteen nimi on: " + laite.Name);
-            Console.WriteLine("Ostopäivä oli: " + laite.PurchaseDate);
-
-            // Luodaan uusi tietokone, joka perii laiteluokan (Device)
-            // 
-            Computer tietokone1 = new Computer();
-            Console.WriteLine("Uuden tietokoneen nimi on " + tietokone1.Name);
-
-            tietokone1.Name = "MacBook";
-            tietokone1.ProcessorType = "Intel 17";
-            tietokone1.AmountRAM = 32;
-
-            Console.WriteLine("Uuden tietokoneen processorin typppi " + tietokone1.Name);
-            Console.WriteLine("Uuden tietokoneen processorin typppi " + tietokone1.ProcessorType);
-            Console.WriteLine("Uuden tietokoneen processorin muisti RAM " + tietokone1.AmountRAM);
-            Console.WriteLine("Uuden tietokoneen processorin typppi " + tietokone1.StorageCapacity);
-
-            Computer tietokone2 = new Computer();
-            tietokone2.Name = "Asus";
-            tietokone2.ProcessorType = "Intel 22";
-            tietokone2.AmountRAM = 19;
-
-            Console.WriteLine("Toinen tietokoneen nimi on " + tietokone2.Name + " ja processori on" + tietokone2.ProcessorType + " muisti on " + tietokone2.AmountRAM);
-
-            // Pidetään ikkuna auki, kunnes käyttäjä painaa <enter>
-            Console.ReadLine();
         }
     }
-}
+        class Smartphone : Device
+        {
+
+        }
+
+        class Tablet : Device
+        {
+        string operatingSystem;
+        public string OperatingSystem { get {  return operatingSystem; } set {  operatingSystem = value; } }
+
+
+        bool stylusEnabled = false;
+        public bool StylusEnabled { get { return stylusEnabled; } set { stylusEnabled = value; } }
+
+
+
+    }
+
+        // Pääohjelman luokka, josta tulee Program.exe
+        internal class Program
+        {
+            static void Main(string[] args)
+            {
+                // Ohjelman varsinaiset toiminnot tapahtuvat täällä
+                // Ohjelma kysyy käyttäjältä tietoja laitteista ja
+                // vastaamalla kysymyksiin tiedot tallennetaan muuttujiin.
+
+                // Luodaan uusi laite Device-luokasta
+
+                Device laite = new Device("Opekone");
+                Console.WriteLine("Laitteen nimi on: " + laite.Name);
+                Console.WriteLine("Ostopäivä oli: " + laite.PurchaseDate);
+
+                // Luodaan uusi tietokone, joka perii laiteluokan (Device)
+                // 
+                Computer tietokone1 = new Computer();
+                Console.WriteLine("Uuden tietokoneen nimi on " + tietokone1.Name);
+
+                tietokone1.Name = "MacBook";
+                tietokone1.ProcessorType = "Intel 17";
+                tietokone1.AmountRAM = 32;
+                tietokone1.StorageCapacity = 31;
+
+
+                DateTime purchedDay = new DateTime(2024, 1, 12);
+                DateTime now = DateTime.Now;
+
+                TimeSpan differanceDays = now - purchedDay;
+
+                Console.WriteLine(differanceDays);
+
+
+
+
+                Console.WriteLine("Uuden tietokoneen nimi " + tietokone1.Name);
+                Console.WriteLine("Uuden tietokoneen processorin typppi " + tietokone1.ProcessorType);
+                Console.WriteLine("Uuden tietokoneen processorin muisti RAM " + tietokone1.AmountRAM + "GB");
+                Console.WriteLine("Uuden tietokoneen  " + tietokone1.StorageCapacity);
+                Console.WriteLine();
+
+                Computer tietokone2 = new Computer();
+                tietokone2.Name = "Asus";
+                tietokone2.ProcessorType = "Intel 22";
+                tietokone2.AmountRAM = 19;
+                tietokone2.StorageCapacity = 45;
+                tietokone2.ShowInfo();
+
+
+                Console.WriteLine();
+                Console.WriteLine("Toinen tietokoneen nimi on " + tietokone2.Name + " ja processori on" + tietokone2.ProcessorType + " muisti on " + tietokone2.AmountRAM + "GB");
+
+                // Pidetään ikkuna auki, kunnes käyttäjä painaa <enter>
+                Console.ReadLine();
+            }
+        }
+    }
