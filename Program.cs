@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,48 +61,43 @@ namespace Laitekirjasto
             this.price = price;
             this.warranty = warranty;
         }
-    }
 
-    class Computer : Device
-    {
 
-        // kentät ja ominaisuudet
-        string processorType;
+        // Yliluokan metodit
 
-        public string ProcessorType { get { return processorType; } set { processorType = value; } }
-
-        int amountRAM;
-        public int AmountRAM { get { return amountRAM; } set { amountRAM = value; } }
-
-        int storageCapacity;
-        public int StorageCapacity { get { return storageCapacity; } set { storageCapacity = value; } }
-
-        //Konstructor
-        public Computer(string processorType, int amountRAM, int storageCapacity)
+        public void ShowPurchaseInfo()
         {
-            this.processorType = processorType;
-            this.amountRAM = amountRAM;
-            this.storageCapacity = storageCapacity;
-        }
-        public Computer() : base()
-        {
+            Console.WriteLine("Laitteen nimi: " + this.name);
+            Console.WriteLine("Ostopäivä: " + this.purchaseDate);
+            Console.WriteLine("Hinta: " + this.price);
+            Console.WriteLine("Takuu: " + this.warranty + " kk");
 
         }
 
-        public Computer(string name) : base(name)
-        {
-        }
-
-
-        public void ShowInfo()
+        public void ShowBasicTechnicalInfo()
 
         {
             Console.WriteLine("Koneen nimi: " + Name);
             Console.WriteLine("Processori: " + ProcessorType);
-            Console.WriteLine("Keskimuisti " +  AmountRAM);
+            Console.WriteLine("Keskimuisti " + AmountRAM);
             Console.WriteLine("Levytila: " + StorageCapacity);
 
         }
+
+    }
+    class Computer : Device
+    {
+
+        // kentät ja ominaisuudet
+       
+        //Konstructor
+        
+        public Computer() : base() { }
+        public Computer(string name) : base(name) { }
+
+
+
+
     }
         class Smartphone : Device
         {
@@ -118,9 +113,19 @@ namespace Laitekirjasto
         bool stylusEnabled = false;
         public bool StylusEnabled { get { return stylusEnabled; } set { stylusEnabled = value; } }
 
+        public Tablet() : base() { }
+
+        public Tablet(string name) : base(name) { }
+
+        public void TabletInfo() 
+        {
+            Console.WriteLine("Käyttöjärjestelämä:" + OperatingSystem);
+            Console.WriteLine("Kynätuki: " + StylusEnabled);
+        }
 
 
-    }
+
+        }
 
         // Pääohjelman luokka, josta tulee Program.exe
         internal class Program
@@ -133,50 +138,74 @@ namespace Laitekirjasto
 
                 // Luodaan uusi laite Device-luokasta
 
-                Device laite = new Device("Opekone");
-                Console.WriteLine("Laitteen nimi on: " + laite.Name);
-                Console.WriteLine("Ostopäivä oli: " + laite.PurchaseDate);
+                //Device laite = new Device("Opekone");
+                //Console.WriteLine("Laitteen nimi on: " + laite.Name);
+                //Console.WriteLine("Ostopäivä oli: " + laite.PurchaseDate);
 
                 // Luodaan uusi tietokone, joka perii laiteluokan (Device)
                 // 
                 Computer tietokone1 = new Computer();
-                Console.WriteLine("Uuden tietokoneen nimi on " + tietokone1.Name);
 
                 tietokone1.Name = "MacBook";
                 tietokone1.ProcessorType = "Intel 17";
                 tietokone1.AmountRAM = 32;
                 tietokone1.StorageCapacity = 31;
+                tietokone1.PurchaseDate = "15.2.2024";
+                tietokone1.Price = 2000.45d;
+                tietokone1.Warranty = 24;
+                
+
+                Console.WriteLine("Tietokone 1:n hankintateidot ");
+                Console.WriteLine("__________________________________");
+                tietokone1.ShowBasicTechnicalInfo();
+                tietokone1.ShowPurchaseInfo();
+
+            
 
 
-                DateTime purchedDay = new DateTime(2024, 1, 12);
-                DateTime now = DateTime.Now;
 
-                TimeSpan differanceDays = now - purchedDay;
-
-                Console.WriteLine(differanceDays);
-
-
-
-
-                Console.WriteLine("Uuden tietokoneen nimi " + tietokone1.Name);
-                Console.WriteLine("Uuden tietokoneen processorin typppi " + tietokone1.ProcessorType);
-                Console.WriteLine("Uuden tietokoneen processorin muisti RAM " + tietokone1.AmountRAM + "GB");
-                Console.WriteLine("Uuden tietokoneen  " + tietokone1.StorageCapacity);
-                Console.WriteLine();
+                //Console.WriteLine("Uuden tietokoneen nimi " + tietokone1.Name);
+                //Console.WriteLine("Uuden tietokoneen processorin typppi " + tietokone1.ProcessorType);
+                //Console.WriteLine("Uuden tietokoneen processorin muisti RAM " + tietokone1.AmountRAM + " GB");
+                //Console.WriteLine("Uuden tietokoneen  " + tietokone1.StorageCapacity);
+                //Console.WriteLine("_________________________________________________________");
 
                 Computer tietokone2 = new Computer();
                 tietokone2.Name = "Asus";
                 tietokone2.ProcessorType = "Intel 22";
                 tietokone2.AmountRAM = 19;
                 tietokone2.StorageCapacity = 45;
-                tietokone2.ShowInfo();
+                
 
 
-                Console.WriteLine();
-                Console.WriteLine("Toinen tietokoneen nimi on " + tietokone2.Name + " ja processori on" + tietokone2.ProcessorType + " muisti on " + tietokone2.AmountRAM + "GB");
 
-                // Pidetään ikkuna auki, kunnes käyttäjä painaa <enter>
-                Console.ReadLine();
+
+                Console.WriteLine("Tietokone 2:n hankintateidot ");
+                Console.WriteLine("____________________________________________________________");
+                tietokone2.ShowBasicTechnicalInfo();
+
+
+
+
+            Tablet tabletti1 = new Tablet("iPad");
+            tabletti1.PurchaseDate = "1.10.2022";
+            tabletti1.OperatingSystem = "IOS";
+            tabletti1.StylusEnabled = true;
+
+
+            Console.WriteLine("Tabletti 1:n hankintateidot ");
+            Console.WriteLine("____________________________________________________________");
+            tabletti1.ShowBasicTechnicalInfo();
+            tabletti1.ShowPurchaseInfo();
+            tabletti1.TabletInfo();
+
+
+
+
+            //Console.WriteLine("Toinen tietokoneen nimi on " + tietokone2.Name + " ja processori on" + tietokone2.ProcessorType + " muisti on " + tietokone2.AmountRAM + " GB");
+
+            // Pidetään ikkuna auki, kunnes käyttäjä painaa <enter>
+            Console.ReadLine();
             }
         }
     }
